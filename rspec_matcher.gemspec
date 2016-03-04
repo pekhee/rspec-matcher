@@ -1,15 +1,16 @@
 $LOAD_PATH.push File.expand_path("../lib", __FILE__)
-require "rspec_matcher/identity"
+require "rspec/matcher/identity"
 
 Gem::Specification.new do |spec|
-  spec.name = RspecMatcher::Identity.name
-  spec.version = RspecMatcher::Identity.version
+  spec.name = RSpec::Matcher::Identity.name
+  spec.version = RSpec::Matcher::Identity.version
   spec.platform = Gem::Platform::RUBY
   spec.authors = ["Pooyan Khosravi"]
   spec.email = ["pekhee@gmail.com"]
-  spec.homepage = "https://github.com/pekhee/rspec_matcher"
-  spec.summary = "TODO: Add gem summary here."
-  spec.description = "TODO: Add gem description here."
+  spec.homepage = "https://github.com/pekhee/rspec-matcher"
+  spec.summary = "Implements RSpec Matcher interface as a module."
+  spec.description =
+    "RSpec Base Matcher implementation with automatic registration as a module."
   spec.license = "MIT"
 
   if ENV["RUBY_GEM_SECURITY"] == "enabled"
@@ -17,6 +18,7 @@ Gem::Specification.new do |spec|
     spec.cert_chain = [File.expand_path("~/.ssh/gem-public.pem")]
   end
 
+  spec.add_dependency "activesupport", ">= 4", "< 6"
   spec.add_development_dependency "rake"
   spec.add_development_dependency "gemsmith"
   spec.add_development_dependency "pry"
