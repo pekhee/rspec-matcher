@@ -7,6 +7,7 @@
 [![Travis CI Status](https://secure.travis-ci.org/pekhee/rspec-matcher.svg)](https://travis-ci.org/pekhee/rspec-matcher)
 [![Inch CI](https://inch-ci.org/github/pekhee/rspec-matcher.svg?branch=master)](https://inch-ci.org/github/pekhee/rspec-matcher)
 [![Gitter](https://camo.githubusercontent.com/da2edb525cde1455a622c58c0effc3a90b9a181c/68747470733a2f2f6261646765732e6769747465722e696d2f4a6f696e253230436861742e737667)](https://gitter.im/pekhee/rspec-matcher)
+
 <!-- Tocer[start]: Auto-generated, don't remove. -->
 
 # Table of Contents
@@ -54,6 +55,7 @@ Add the following to your Gemfile:
     gem "rspec-matcher"
 
 # Usage
+[API Reference](http://www.rubydoc.info/github/pekhee/rspec-matcher/master)
 
     class BeNilMatcher
       include RSpec::Matcher
