@@ -43,10 +43,11 @@ module RSpec
 
     # @api private
     # Used to let user define initialize
-    module PrependedMethods
+    module PrependedMethods #:nodoc:
+      # Stores expected and passes all args to super
       # @api private
       # @param [any] expected stored as expected and not passed to custom initializer
-      # @param [any] params... passed to custom initializer
+      # @param [any] args... passed to custom initializer
       # @param [Proc] block passed to custom initializer
       def initialize expected = UNDEFINED, *args, &block
         self.expected = expected

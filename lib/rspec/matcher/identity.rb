@@ -1,7 +1,8 @@
 module RSpec
   module Matcher
     # Gem identity information.
-    module Identity
+    # @api private
+    module Identity #:nodoc:
       def self.name
         "rspec-matcher"
       end
