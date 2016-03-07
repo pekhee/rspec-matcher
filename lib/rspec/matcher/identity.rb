@@ -2,21 +2,21 @@ module RSpec
   module Matcher
     # Gem identity information.
     module Identity
-        def self.name
+      def self.name
         "rspec-matcher"
-        end
+      end
 
-        def self.label
+      def self.label
         "RSpec::Matcher"
-        end
+      end
 
-        def self.version
+      def self.version
         "0.1.0"
-        end
+      end
 
-        def self.version_label
+      def self.version_label
         "#{label} #{version}"
-        end
+      end
     end
   end
 end
