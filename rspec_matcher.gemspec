@@ -37,6 +37,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "codeclimate-test-reporter"
 
   spec.files = Dir["lib/**/*", "vendor/**/*"]
-  spec.extra_rdoc_files = Dir["README*", "LICENSE*"]
+  spec.extra_rdoc_files = Dir["README*", "LICENSE*", ".yardopts"]
   spec.require_paths = ["lib"]
 end
