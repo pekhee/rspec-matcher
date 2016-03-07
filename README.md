@@ -1,5 +1,7 @@
 # RspecMatcher
 
+[![Join the chat at https://gitter.im/pekhee/rspec-matcher](https://badges.gitter.im/pekhee/rspec-matcher.svg)](https://gitter.im/pekhee/rspec-matcher?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [![Gem Version](https://badge.fury.io/rb/rspec-matcher.svg)](http://badge.fury.io/rb/rspec-matcher)
 [![Code Climate GPA](https://codeclimate.com/github/pekhee/rspec-matcher.svg)](https://codeclimate.com/github/pekhee/rspec-matcher)
 [![Code Climate Coverage](https://codeclimate.com/github/pekhee/rspec-matcher/coverage.svg)](https://codeclimate.com/github/pekhee/rspec-matcher)
