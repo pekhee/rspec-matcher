@@ -1,12 +1,12 @@
 # RspecMatcher
 
-[![Gem Version](https://badge.fury.io/rb/rspec_matcher.svg)](http://badge.fury.io/rb/rspec_matcher)
-[![Code Climate GPA](https://codeclimate.com/github/pekhee/rspec_matcher.svg)](https://codeclimate.com/github/pekhee/rspec_matcher)
-[![Code Climate Coverage](https://codeclimate.com/github/pekhee/rspec_matcher/coverage.svg)](https://codeclimate.com/github/pekhee/rspec_matcher)
-[![Gemnasium Status](https://gemnasium.com/pekhee/rspec_matcher.svg)](https://gemnasium.com/pekhee/rspec_matcher)
-[![Travis CI Status](https://secure.travis-ci.org/pekhee/rspec_matcher.svg)](https://travis-ci.org/pekhee/rspec_matcher)
-[![Patreon](https://img.shields.io/badge/patreon-donate-brightgreen.svg)](https://www.patreon.com/pekhee)
-
+[![Gem Version](https://badge.fury.io/rb/rspec-matcher.svg)](http://badge.fury.io/rb/rspec-matcher)
+[![Code Climate GPA](https://codeclimate.com/github/pekhee/rspec-matcher.svg)](https://codeclimate.com/github/pekhee/rspec-matcher)
+[![Code Climate Coverage](https://codeclimate.com/github/pekhee/rspec-matcher/coverage.svg)](https://codeclimate.com/github/pekhee/rspec-matcher)
+[![Gemnasium Status](https://gemnasium.com/pekhee/rspec-matcher.svg)](https://gemnasium.com/pekhee/rspec-matcher)
+[![Travis CI Status](https://secure.travis-ci.org/pekhee/rspec-matcher.svg)](https://travis-ci.org/pekhee/rspec-matcher)
+[![Inch CI](https://inch-ci.org/github/pekhee/rspec-matcher.svg?branch=master)](https://inch-ci.org/github/pekhee/rspec-matcher)
+[![Gitter](https://camo.githubusercontent.com/da2edb525cde1455a622c58c0effc3a90b9a181c/68747470733a2f2f6261646765732e6769747465722e696d2f4a6f696e253230436861742e737667)](https://gitter.im/pekhee/rspec-matcher)
 <!-- Tocer[start]: Auto-generated, don't remove. -->
 
 # Table of Contents
@@ -26,30 +26,49 @@
 <!-- Tocer[finish]: Auto-generated, don't remove. -->
 
 # Features
+- Implementes RSpec matcher interface as a module.
+- Registers matcher with RSpec.
+- It is stable in contrast to RSpec::Matchers::BaseMatcher.
+- Well tested and documented.
 
 # Requirements
 
-0. [MRI 1.9.3](https://www.ruby-lang.org)
+0. [MRI 2.1.0](https://www.ruby-lang.org)
 
 # Setup
 
 For a secure install, type the following (recommended):
 
-    gem cert --add <(curl -Ls https://www.my-website.com/gem-public.pem)
-    gem install rspec_matcher --trust-policy MediumSecurity
+    gem cert --add <(curl -Ls https://raw.githubusercontent.com/pekhee/rspec-matcher/master/gem-public.pem)
+    gem install rspec-matcher --trust-policy MediumSecurity
 
 NOTE: A HighSecurity trust policy would be best but MediumSecurity enables signed gem verification while
 allowing the installation of unsigned dependencies since they are beyond the scope of this gem.
 
 For an insecure install, type the following (not recommended):
 
-    gem install rspec_matcher
+    gem install rspec-matcher
 
 Add the following to your Gemfile:
 
-    gem "rspec_matcher"
+    gem "rspec-matcher"
 
 # Usage
+
+    class BeNilMatcher
+      include RSpec::Matcher
+      register_as "be_nil"
+
+      def match
+        actual.nil?
+      end
+
+      def failure_message
+        "expected #{expected} to be nil"
+      end
+    end
+
+    expect(nil).to be_nil
 
 # Tests
 
