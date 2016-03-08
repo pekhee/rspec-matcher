@@ -1,3 +1,5 @@
-# v0.1.0 (2016-03-04)
+# v0.1.2 (2016-03-08)
 
 - Initial version.
+- Minor fixes.
+- Expectation resolution control.
