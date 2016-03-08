@@ -168,5 +168,26 @@ describe "RSpec::Matcher" do
       expect(be_nil(not_important).matches?(nil)).to be_truthy
       expect(be_nil.matches?(nil)).to be_truthy
     end
+
+    describe ".register_as" do
+      before :all do
+        Class.new do
+          include RSpec::Matcher
+          register_as "always_fail", result: false
+          register_as "always_pass", result: true
+
+          attr_accessor :result
+
+          def match
+            result
+          end
+        end
+      end
+
+      it "sets options passed to object on initialize" do
+        expect(always_fail.matches? not_important).to be_falsy
+        expect(always_pass.matches? not_important).to be_truthy
+      end
+    end
   end
 end

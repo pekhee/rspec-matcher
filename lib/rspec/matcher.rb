@@ -1,6 +1,7 @@
 require "rspec/matcher/identity"
 require "active_support/concern"
 
+# Does not monkey patch but is inside RSpec namespace.
 module RSpec
   # Provides minimal interface for creating RSpec Matchers.
   #
@@ -44,36 +45,45 @@ module RSpec
     # @api private
     # Used to let user define initialize
     module PrependedMethods #:nodoc:
-      # Stores expected and passes all args to super
+      # Stores expected and options then passes remaining args to super
       # @api private
       # @param [any] expected stored as expected and not passed to custom initializer
+      # @param [Hash] options stored by calling setter methods
       # @param [any] args... passed to custom initializer
       # @param [Proc] block passed to custom initializer
-      def initialize expected = UNDEFINED, *args, &block
+      def initialize expected = UNDEFINED, options = {}, *args, &block
         self.expected = expected
+        options.to_a.each do |option|
+          key, value = option
+          send("#{key}=", value)
+        end
         super(*args, &block)
       end
     end
 
     # Methods added as class method to includer
     module ClassMethods
-      # Registers this matcher in RSpec.
+      # Registers this matcher in RSpec. Optionally sets options via setter
+      # methods on initialize.
       # @example
       #   class BeNil
       #     include RSpec::Matcher
       #     register_as "be_nil"
+      #     register_as "be_empty", empty: true
       #     #...
       #   end
       #
-      #   expect(actual).to be_nil
+      #   expect(nil).to be_nil
+      #   expect([]).to be_empty
       #
+      # @note self.empty = true is called on initialize
       # @param [String] name what to register this matcher as
       # @return [void]
-      def register_as name
+      def register_as name, options = {}
         s = self
         m = Module.new do
-          define_method name do |*args, &block|
-            s.new(*args, &block)
+          define_method name do |expected = UNDEFINED, *args, &block|
+            s.new(expected, options, *args, &block)
           end
         end
 
