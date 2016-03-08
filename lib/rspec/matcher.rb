@@ -87,9 +87,14 @@ module RSpec
     # Hides RSpec internal api
     def matches? actual
       self.actual = actual
-      return match if method(:match).arity == 0
 
-      match actual
+      catch(:resolution) do
+        if method(:match).arity == 0
+          match
+        else
+          match actual
+        end
+      end
     end
 
     # @method actual
@@ -153,6 +158,24 @@ module RSpec
     # @return [Boolean]
     def supports_block_expectations?
       false
+    end
+
+    private
+
+    # @api public
+    # Stops evaluation and tells RSpec there was a match.
+    # @throw :resolution
+    # @return [void]
+    def resolve_expectation
+      throw :resolution, true
+    end
+
+    # @api public
+    # Stops evaluation and tells RSpec there wasn't a match.
+    # @throw :resolution
+    # @return [void]
+    def reject_expectation
+      throw :resolution, false
     end
   end
 end

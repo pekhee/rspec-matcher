@@ -88,7 +88,45 @@ describe "RSpec::Matcher" do
     end
   end
 
-  describe "main interface" do
+  describe "expectation resolution control" do
+    describe "#resolve_expectation" do
+      it_behaves_like "is defined", name: "resolve_expectation"
+
+      it "resolves matcher" do
+        matcher = Class.new do
+          include RSpec::Matcher
+
+          def match
+            resolve_expectation
+
+            false
+          end
+        end.new
+
+        expect(matcher.matches? not_important).to be_truthy
+      end
+    end
+
+    describe "#reject_expectation" do
+      it_behaves_like "is defined", name: "reject_expectation"
+
+      it "rejects matcher" do
+        matcher = Class.new do
+          include RSpec::Matcher
+
+          def match
+            reject_expectation
+
+            false
+          end
+        end.new
+
+        expect(matcher.matches? not_important).to be_falsy
+      end
+    end
+  end
+
+  describe "main rspec interface" do
     subject :instance do
       Class.new do
         include RSpec::Matcher
