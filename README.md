@@ -40,7 +40,7 @@
 
 For a secure install, type the following (recommended):
 
-    gem cert --add <(curl -Ls https://raw.githubusercontent.com/pekhee/rspec-matcher/master/gem-public.pem)
+    gem cert --add <(curl -Ls https://raw.githubusercontent.com/pekhee/rspec-matcher/master/pekhee.pem)
     gem install rspec-matcher --trust-policy MediumSecurity
 
 NOTE: A HighSecurity trust policy would be best but MediumSecurity enables signed gem verification while
