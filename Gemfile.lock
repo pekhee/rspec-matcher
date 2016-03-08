@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rspec-matcher (0.1.2)
+    rspec-matcher (0.1.3)
       activesupport (>= 4, < 6)
 
 GEM
