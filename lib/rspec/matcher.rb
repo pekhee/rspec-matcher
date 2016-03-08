@@ -128,9 +128,10 @@ module RSpec
       raise "not implemented"
     end
 
-    # Describes what this matcher does for composable matchers.
+    # Describes what this matcher does.
     # @example be an string with X length
     # @example match X regex
+    # @note for composable matchers
     # @note raises by default
     # @return [String]
     def description
