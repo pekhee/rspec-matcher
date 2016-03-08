@@ -188,5 +188,11 @@ module RSpec
     def reject_expectation
       throw :resolution, false
     end
+
+    # @api public
+    # Indicates if expected was passed or not
+    def undefined?
+      expected == UNDEFINED
+    end
   end
 end

@@ -88,6 +88,15 @@ describe "RSpec::Matcher" do
     end
   end
 
+  describe "#undefined? " do
+    it_behaves_like "is defined", name: :undefined?
+
+    it "indicates if expected is present or not" do
+      expect(to_be_nil_matcher.new.send(:undefined?)).to be_truthy
+      expect(to_be_nil_matcher.new(not_important).send(:undefined?)).to be_falsy
+    end
+  end
+
   describe "expectation resolution control" do
     describe "#resolve_expectation" do
       it_behaves_like "is defined", name: "resolve_expectation"
