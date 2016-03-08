@@ -55,7 +55,7 @@ Add the following to your Gemfile:
     gem "rspec-matcher"
 
 # Usage
-[API Reference](http://www.rubydoc.info/gems/rspec-matcher/0.1.1/RSpec/Matcher)
+[API Reference](http://www.rubydoc.info/gems/rspec-matcher/RSpec/Matcher)
 
     class BeNilMatcher
       include RSpec::Matcher
