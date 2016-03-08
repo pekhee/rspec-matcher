@@ -103,7 +103,7 @@ describe "RSpec::Matcher" do
           end
         end.new
 
-        expect(matcher.matches? not_important).to be_truthy
+        expect(matcher.matches?(not_important)).to be_truthy
       end
     end
 
@@ -121,7 +121,7 @@ describe "RSpec::Matcher" do
           end
         end.new
 
-        expect(matcher.matches? not_important).to be_falsy
+        expect(matcher.matches?(not_important)).to be_falsy
       end
     end
   end
@@ -185,8 +185,8 @@ describe "RSpec::Matcher" do
       end
 
       it "sets options passed to object on initialize" do
-        expect(always_fail.matches? not_important).to be_falsy
-        expect(always_pass.matches? not_important).to be_truthy
+        expect(always_fail.matches?(not_important)).to be_falsy
+        expect(always_pass.matches?(not_important)).to be_truthy
       end
     end
   end
