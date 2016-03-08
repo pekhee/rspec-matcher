@@ -1,4 +1,4 @@
-# RspecMatcher
+# RSpec::Matcher
 
 [![Gem Version](https://badge.fury.io/rb/rspec-matcher.svg)](http://badge.fury.io/rb/rspec-matcher)
 [![Code Climate GPA](https://codeclimate.com/github/pekhee/rspec-matcher.svg)](https://codeclimate.com/github/pekhee/rspec-matcher)
