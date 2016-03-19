@@ -12,7 +12,7 @@ module RSpec
       end
 
       def self.version
-        "0.1.3"
+        "0.1.4"
       end
 
       def self.version_label
