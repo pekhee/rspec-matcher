@@ -209,6 +209,8 @@ module RSpec
       false
     end
 
+    # Always gets called after decision is made.
+    # @return [void]
     def clean_up
     end
 
