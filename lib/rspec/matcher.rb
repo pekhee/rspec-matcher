@@ -43,6 +43,45 @@ module RSpec
     end
 
     # @api private
+    # Ensures hook is always called and takes care of control jumps.
+    class RescueAndCatch
+      attr_accessor :context, :catchable, :to_catch, :rescuable, :to_rescue
+
+      def initialize context, &block
+        self.context = context
+        instance_eval(&block)
+      end
+
+      def result
+        r = catch catchable do
+          cdo(&to_catch)
+        end
+        cdo(&to_rescue)
+
+        r
+      rescue rescuable => e
+        cdo(&to_rescue)
+        raise e
+      end
+
+      private
+
+      def catching catchable, &block
+        self.to_catch = block
+        self.catchable = catchable
+      end
+
+      def ensuring rescuable, &block
+        self.to_rescue = block
+        self.rescuable = rescuable
+      end
+
+      def cdo &block
+        context.instance_eval(&block)
+      end
+    end
+
+    # @api private
     # Used to let user define initialize
     module PrependedMethods #:nodoc:
       # Stores expected and options then passes remaining args to super
@@ -97,14 +136,13 @@ module RSpec
     # Hides RSpec internal api
     def matches? actual
       self.actual = actual
-
-      catch(:resolution) do
-        if method(:match).arity == 0
-          match
-        else
-          match actual
+      RescueAndCatch.new self do
+        catching(:resolution) do
+          method(:match).arity == 0 ? match : match(actual)
         end
-      end
+
+        ensuring(Exception) { clean_up }
+      end.result
     end
 
     # @method actual
@@ -169,6 +207,9 @@ module RSpec
     # @return [Boolean]
     def supports_block_expectations?
       false
+    end
+
+    def clean_up
     end
 
     private

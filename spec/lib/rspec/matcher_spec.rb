@@ -88,12 +88,23 @@ describe "RSpec::Matcher" do
     end
   end
 
-  describe "#undefined? " do
+  describe "#undefined?" do
     it_behaves_like "is defined", name: :undefined?
 
     it "indicates if expected is present or not" do
       expect(to_be_nil_matcher.new.send(:undefined?)).to be_truthy
       expect(to_be_nil_matcher.new(not_important).send(:undefined?)).to be_falsy
+    end
+  end
+
+  describe "#clean_up" do
+    it_behaves_like "is defined", name: :clean_up
+
+    it "gets called no matter what" do
+      expect(instance).to receive(:clean_up)
+      allow(instance).to receive(:match) { raise Exception, "test probe" }
+
+      expect { instance.matches? not_important }.to raise_error Exception, "test probe"
     end
   end
 
