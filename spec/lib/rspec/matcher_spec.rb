@@ -158,6 +158,37 @@ describe "RSpec::Matcher" do
         it_behaves_like "default hook", name: interface, raises: "not implemented"
       end
     end
+
+    context "when #description is defined" do
+      before(:each) do
+        allow(instance).to receive(:description).and_return ""
+      end
+
+      describe "#failure_message" do
+        it "defaults to a positive sentence" do
+          expect(instance.failure_message).to match(/.*?to/)
+          expect(instance.failure_message).not_to match(/.*?not\sto/)
+        end
+      end
+
+      describe "#failure_message_when_negated" do
+        it "defaults to a negative sentence" do
+          expect(instance.failure_message_when_negated).to match(/.*?not\sto/)
+        end
+      end
+
+      context "when there is a message" do
+        before(:each) { allow(instance).to receive(:_message).and_return "test probe" }
+
+        [:failure_message, :failure_message_when_negated].each do |method|
+          describe "##{method}" do
+            it "adds given message to default" do
+              expect(instance.failure_message).to match(/test probe/)
+            end
+          end
+        end
+      end
+    end
   end
 
   context "predicates interface" do

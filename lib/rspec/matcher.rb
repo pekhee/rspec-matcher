@@ -39,7 +39,8 @@ module RSpec
     included do
       prepend RSpec::Matcher::PrependedMethods
 
-      attr_accessor :expected, :actual
+      attr_accessor :expected, :actual, :_message
+      private :_message, :_message=
     end
 
     # @api private
@@ -171,6 +172,7 @@ module RSpec
     # @example match X regex
     # @note for composable matchers
     # @note raises by default
+    # @note used for failure messages
     # @return [String]
     def description
       raise "not implemented"
@@ -182,7 +184,9 @@ module RSpec
     # @note raises by default
     # @return [String]
     def failure_message
-      raise "not implemented"
+      return "Expected #{expected} to #{description}" if _message == UNDEFINED
+
+      "Expected #{expected} to #{description} but #{_message}"
     end
 
     # Describe failure when not_to is used.
@@ -191,7 +195,7 @@ module RSpec
     # @note raises by default
     # @return [String]
     def failure_message_when_negated
-      raise "not implemented"
+      failure_message.sub "to", "not to"
     end
 
     # Indicates if actual and expected should be diffed on failure.
@@ -227,8 +231,11 @@ module RSpec
     # @api public
     # Stops evaluation and tells RSpec there wasn't a match.
     # @throw :resolution
+    # @note message is used in failure messages
+    # @param [String] message reason expectation was rejected
     # @return [void]
-    def reject_expectation
+    def reject_expectation message = UNDEFINED
+      self._message = message
       throw :resolution, false
     end
 
